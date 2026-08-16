@@ -1,0 +1,31 @@
+# Copy to wrangler.toml and fill in your own values.
+name = "case-evidence"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+account_id = "YOUR_CLOUDFLARE_ACCOUNT_ID"
+
+# Option A: your own domain (nicer for reviewers)
+# routes = [
+#   { pattern = "case.yourdomain.com", custom_domain = true }
+# ]
+# Option B: delete the routes block and use the free <name>.<subdomain>.workers.dev URL.
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "case-evidence"
+
+[[kv_namespaces]]
+binding = "LOG"
+id = "YOUR_KV_NAMESPACE_ID"
+
+# 10 wrong-password attempts per minute per IP, then 429.
+[[unsafe.bindings]]
+name = "AUTH_LIMITER"
+type = "ratelimit"
+namespace_id = "1104"
+simple = { limit = 10, period = 60 }
+
+# Secrets (set with `npx wrangler secret put NAME`, never committed):
+#   SITE_USER / SITE_PASS           — your own (admin) credential; sees /_log
+#   REVIEWER_USER / REVIEWER_PASS   — the credential you give the manufacturer
+# Use long random passphrases (e.g. five hyphenated words + digits).

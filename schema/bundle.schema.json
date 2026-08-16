@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Case bundle — single source of truth for all generated artifacts",
+  "type": "object",
+  "required": ["timeline", "video", "photos", "componentLedger"],
+  "properties": {
+    "vehicle": {
+      "type": "object",
+      "properties": {
+        "modelYear": { "type": "integer" },
+        "makeModel": { "type": "string" },
+        "vin": { "type": "string" }
+      }
+    },
+    "categories": {
+      "description": "The closed set of problem tags. Every media item must use one.",
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "timeline": {
+      "description": "Every dated event: purchase, reports, repair visits, recalls, bulletins, communications. Chronology is derived by sorting; never store narrative order.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "typeLabel", "title"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "typeLabel": { "type": "string", "description": "e.g. Purchase, Owner report, Repair visit, Safety recall, Technical bulletin, Dealer/VW communication, Denial, Chat transcript" },
+          "title": { "type": "string", "description": "Factual; no advocacy words" },
+          "fileId": { "type": "string", "description": "Stable ID of the source document; exhibits and doc links key off this" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "video": { "$ref": "#/$defs/mediaList" },
+    "photos": { "$ref": "#/$defs/mediaList" },
+    "componentLedger": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "ro", "component", "action", "basis"],
+        "properties": {
+          "date": { "type": "string", "description": "date or 'start → end' range" },
+          "ro": { "type": "string" },
+          "component": { "type": "string" },
+          "action": { "type": "string" },
+          "basis": { "type": "string", "description": "Their stated reason, quoted verbatim from the RO" },
+          "odo": { "type": "string" },
+          "recurred": {
+            "type": ["object", "null"],
+            "properties": {
+              "date": { "type": "string", "format": "date" },
+              "ref": { "type": "string", "description": "fileId of the recurring capture/report" }
+            }
+          }
+        }
+      }
+    },
+    "dealershipStay": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "string", "format": "date" },
+        "end": { "type": "string", "format": "date" }
+      },
+      "description": "The longest out-of-service stay; compute day counts in code, never store them"
+    },
+    "scopeReviewQueue": {
+      "type": "array",
+      "description": "Claims from memory awaiting a primary source. Nothing here may enter any generated artifact.",
+      "items": { "type": "object" }
+    }
+  },
+  "$defs": {
+    "mediaList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "kind", "subsystem", "description", "fileId"],
+        "properties": {
+          "catalogueId": { "type": "integer" },
+          "date": { "type": "string", "format": "date" },
+          "time": { "type": "string" },
+          "kind": { "enum": ["video", "photo"] },
+          "subsystem": { "type": "string", "description": "One of categories[]" },
+          "description": { "type": "string", "description": "Only what is visible/audible in the capture" },
+          "fileId": { "type": "string" },
+          "dupOf": { "type": ["string", "null"] },
+          "isDocScan": { "type": "boolean", "description": "True for captures of paperwork/apps — excluded from incident counts" },
+          "sourceNote": { "type": "string", "description": "Where the date/time came from (metadata, filename, document)" }
+        }
+      }
+    }
+  }
+}

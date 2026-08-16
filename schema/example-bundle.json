@@ -1,0 +1,48 @@
+{
+  "vehicle": { "modelYear": 2024, "makeModel": "EXAMPLE EV", "vin": "EXAMPLEVIN0000000" },
+  "categories": ["windows", "door handles", "displays", "charging", "other electrical"],
+  "timeline": [
+    { "date": "2024-03-10", "typeLabel": "Purchase", "title": "Retail Purchase Agreement — Deal #0000", "fileId": "doc-0001" },
+    { "date": "2024-07-02", "typeLabel": "Owner report", "title": "First written report — displays went dark while driving", "fileId": "doc-0002" },
+    { "date": "2024-07-05", "typeLabel": "Repair visit", "title": "RO100001 — displays: could not verify", "fileId": "doc-0003" },
+    { "date": "2024-11-20", "typeLabel": "Safety recall", "title": "Recall 24V-000 filed — display software", "fileId": "doc-0004" }
+  ],
+  "video": [
+    {
+      "catalogueId": 12,
+      "date": "2024-08-14",
+      "time": "21:42",
+      "kind": "video",
+      "subsystem": "displays",
+      "description": "Instrument cluster dark at speed; infotainment rebooting (34s)",
+      "fileId": "med-0012",
+      "sourceNote": "capture time from file metadata"
+    }
+  ],
+  "photos": [
+    {
+      "catalogueId": 13,
+      "date": "2024-08-15",
+      "kind": "photo",
+      "subsystem": "displays",
+      "description": "Warning message on cluster after restart",
+      "fileId": "med-0013",
+      "dupOf": null
+    }
+  ],
+  "componentLedger": [
+    {
+      "date": "2024-07-05",
+      "ro": "RO100001",
+      "component": "Displays / instrument cluster",
+      "action": "Inspected; software reset",
+      "basis": "\"could not verify customer concern\"",
+      "odo": "4,210",
+      "recurred": { "date": "2024-08-14", "ref": "med-0012" }
+    }
+  ],
+  "dealershipStay": { "start": "2024-07-03", "end": "2024-07-05" },
+  "scopeReviewQueue": [
+    { "claim": "Owner recalls a phone report in June 2024", "status": "needs source — check carrier records" }
+  ]
+}
