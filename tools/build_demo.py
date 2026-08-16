@@ -10,8 +10,8 @@ os.makedirs("docs", exist_ok=True)
 # ---- placeholder thumbnails: tiny inline SVGs as data URIs ----
 def svg_thumb(kind, label):
     icon = {"video": "&#9654;", "photo": "&#9679;", "doc": "&#9636;"}[kind]
-    bg = {"video": "#3a4a5a", "photo": "#4a5a4a", "doc": "#efece3"}[kind]
-    fg = "#6b675e" if kind == "doc" else "#ffffff"
+    bg = {"video": "#2b2b2b", "photo": "#5a5a5a", "doc": "#f2f2f2"}[kind]
+    fg = "#555555" if kind == "doc" else "#ffffff"
     s = (f'<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120">'
          f'<rect width="120" height="120" fill="{bg}"/>'
          f'<text x="60" y="56" font-size="30" fill="{fg}" text-anchor="middle">{icon}</text>'
@@ -84,15 +84,15 @@ def tt(d, t, u=None, ul=None, sub=None):
     return len(TT) - 1
 
 S = []
-LANES = [(30, "Safety recall — federal filing &#8594; work on this car", "#a3271f"),
-         (86, "Vehicle at the dealership", "#7a766c"),
-         (142, "Manufacturer publications", "#6b675e"),
-         (198, "Owner — reports &amp; evidence", "#1a4d8f")]
+LANES = [(30, "Safety recall — federal filing &#8594; work on this car", "#111111"),
+         (86, "Vehicle at the dealership", "#8a8a8a"),
+         (142, "Manufacturer publications", "#555555"),
+         (198, "Owner — reports &amp; evidence", "#111111")]
 for yy, lab, col in LANES:
     S.append(f'<text x="16" y="{yy-6}" font-size="10.5" fill="{col}">{lab}</text>')
 for yr in ("2025", "2026"):
-    S.append(f'<line x1="{x(yr+"-01-01")}" y1="22" x2="{x(yr+"-01-01")}" y2="230" stroke="#e3e0d8"/>'
-             f'<text x="{x(yr+"-01-01")}" y="244" text-anchor="middle" font-size="10" fill="#6b675e">{yr}</text>')
+    S.append(f'<line x1="{x(yr+"-01-01")}" y1="22" x2="{x(yr+"-01-01")}" y2="230" stroke="#dcdcdc"/>'
+             f'<text x="{x(yr+"-01-01")}" y="244" text-anchor="middle" font-size="10" fill="#555555">{yr}</text>')
 
 def bar(y, d0, d1, col, tip, title, light=False, marks=(), u=None, ul=None):
     i = tt(tip, title, u, ul)
@@ -106,20 +106,20 @@ def tick(y, d, col, tip, title, h=20, u=None, ul=None):
     S.append(f'<rect class="tlp" data-i="{i}" x="{x(d)-1.2}" y="{y}" width="2.4" height="{h}" fill="{col}" fill-opacity=".8"/>')
 
 PD, PDL = "placeholder-document.pdf", "Open the full document (placeholder PDF)"
-bar(30, "2025-05-06", "2025-11-12", "#a3271f",
+bar(30, "2025-05-06", "2025-11-12", "#111111",
     "2025-05-06 &#8594; 2025-11-12",
     "Recall 25V-987 — display software. Filed May 6, 2025. White mark: remedy available to dealers "
     "October 10, 2025. Performed on this car November 12, 2025 — 190 days after filing.",
     marks=("2025-10-10",), u=PD, ul=PDL)
-bar(86, "2025-08-20", "2025-11-12", "#7a766c",
+bar(86, "2025-08-20", "2025-11-12", "#8a8a8a",
     "84 days", "At the dealership Aug 20 &#8594; Nov 12, 2025 — 84 days. 51 days waiting for a remedy "
     "to exist ('no repair available'); 33 days once work could begin.", light=True)
 for ro, d0, d1 in (("RO410221", "2024-07-08", "2024-07-09"), ("RO412876", "2024-09-20", "2024-09-20"),
                    ("RO415502", "2024-12-09", "2024-12-11"), ("RO427710", "2026-03-03", "2026-03-06")):
-    bar(86, d0, d1, "#55524a", f"{d0} &#8594; {d1}", f"{ro} — in the shop.", u=PD, ul=PDL)
-tick(142, "2024-08-28", "#6b675e", "2024-08-28 · Technical bulletin", "TSB LT-24-07 — rear door latch sticking", u=PD, ul=PDL)
-tick(142, "2025-06-12", "#6b675e", "2025-06-12 · Dealer notice", "'No repair available' — dealers told to wait for remedy", u=PD, ul=PDL)
-tick(142, "2026-03-24", "#6b675e", "2026-03-24 · Written position", "Manufacturer: defect 'does not substantially impair'", u=PD, ul=PDL)
+    bar(86, d0, d1, "#333333", f"{d0} &#8594; {d1}", f"{ro} — in the shop.", u=PD, ul=PDL)
+tick(142, "2024-08-28", "#555555", "2024-08-28 · Technical bulletin", "TSB LT-24-07 — rear door latch sticking", u=PD, ul=PDL)
+tick(142, "2025-06-12", "#555555", "2025-06-12 · Dealer notice", "'No repair available' — dealers told to wait for remedy", u=PD, ul=PDL)
+tick(142, "2026-03-24", "#555555", "2026-03-24 · Written position", "Manufacturer: defect 'does not substantially impair'", u=PD, ul=PDL)
 for d, t in (("2024-07-06", "First written report — displays dark while driving"),
              ("2024-08-14", "#012 — cluster dark at speed (video)"),
              ("2024-09-18", "#016 — latch failure (video)"), ("2024-12-08", "#025 — charging stopped (photo)"),
@@ -128,7 +128,7 @@ for d, t in (("2024-07-06", "First written report — displays dark while drivin
              ("2026-02-03", "#048 — blackout 83 days after recall remedy (video)"),
              ("2026-04-18", "#059 — same latch, 43 days after replacement (video)"),
              ("2026-04-27", "Written demand for repurchase")):
-    tick(198, d, "#1a4d8f", d, t)
+    tick(198, d, "#111111", d, t)
 
 LEDGER = [
     ("Jul 8–9, 2024", "RO410221", "Displays / instrument cluster", "Inspected; software reset",
@@ -165,26 +165,26 @@ HTML = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Demo case file — fictional — lemon-case-file</title>
 <style>
-:root{{--ink:#23211c;--mut:#6b675e;--line:#e3e0d8;--blue:#1a4d8f;--paper:#faf9f6;}}
+:root{{--ink:#111111;--mut:#555555;--line:#dcdcdc;--blue:#111111;--paper:#ffffff;}}
 body{{font:15px/1.6 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);margin:0;background:var(--paper);}}
-.fiction{{background:#1f1d18;color:#ffd34d;text-align:center;padding:10px 16px;font-size:13.5px;letter-spacing:.02em;}}
+.fiction{{background:#000000;color:#ffffff;text-align:center;padding:10px 16px;font-size:13.5px;letter-spacing:.02em;}}
 .fiction b{{color:#fff;}}
 .wrap{{max-width:1040px;margin:0 auto;padding:28px 20px 60px;}}
 h1{{font-size:26px;margin:18px 0 2px;}}
 .sub{{color:var(--mut);font-size:13px;margin-bottom:18px;}}
-.banner{{border:1px solid var(--line);background:#f4f3ee;border-radius:8px;padding:10px 16px;font-size:13.5px;margin-bottom:22px;}}
-.abstract{{border-left:3px solid var(--blue);background:#f6f7fa;padding:14px 18px;margin:0 0 26px;}}
+.banner{{border:1px solid var(--line);background:#f7f7f7;border-radius:8px;padding:10px 16px;font-size:13.5px;margin-bottom:22px;}}
+.abstract{{border-left:3px solid var(--blue);background:#f7f7f7;padding:14px 18px;margin:0 0 26px;}}
 .ab-label{{font-size:11px;letter-spacing:.08em;color:var(--blue);text-transform:uppercase;font-weight:700;}}
 .ab-ask{{margin-top:10px;font-weight:600;color:var(--blue);}}
-h2{{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#8a5a1f;margin:34px 0 10px;}}
+h2{{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#111111;margin:34px 0 10px;}}
 table.ledger{{width:100%;border-collapse:collapse;font-size:13.5px;}}
-.ledger th{{text-align:left;border-bottom:2px solid #b9b4a6;padding:6px 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);}}
+.ledger th{{text-align:left;border-bottom:2px solid #111111;padding:6px 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);}}
 .ledger td{{border-bottom:1px solid var(--line);padding:8px;vertical-align:top;}}
 .basis{{color:var(--mut);font-size:12.5px;}}
-td.rec{{color:#a3271f;font-weight:600;white-space:nowrap;}}
+td.rec{{color:#111111;font-weight:600;white-space:nowrap;}}
 svg text{{font-family:inherit;}}
 .tlp{{cursor:pointer;}}
-#tip{{position:fixed;display:none;background:#1f1d18;color:#fff;font-size:12.5px;padding:7px 10px;border-radius:6px;max-width:340px;z-index:50;pointer-events:none;line-height:1.45;}}
+#tip{{position:fixed;display:none;background:#000000;color:#fff;font-size:12.5px;padding:7px 10px;border-radius:6px;max-width:340px;z-index:50;pointer-events:none;line-height:1.45;}}
 #evm{{display:none;position:fixed;inset:0;background:rgba(20,18,14,.72);z-index:60;align-items:center;justify-content:center;padding:24px;}}
 #evm .box{{background:#fff;border-radius:10px;max-width:520px;padding:22px 26px;position:relative;}}
 #evm .evm-x{{position:absolute;top:10px;right:14px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--mut);}}
@@ -199,23 +199,23 @@ svg text{{font-family:inherit;}}
 .gcell{{position:relative;width:84px;height:84px;border-radius:6px;overflow:hidden;display:block;}}
 .gcell img{{width:100%;height:100%;object-fit:cover;display:block;}}
 .gcell .gv{{position:absolute;right:5px;bottom:3px;color:#fff;font-size:12px;text-shadow:0 0 4px #000;}}
-.gdoc{{outline:2px solid #d8d2c0;outline-offset:-2px;}}
-.gdoc .gd{{position:absolute;left:0;right:0;bottom:0;background:rgba(31,29,24,.78);color:#efece3;font-size:9.5px;text-align:center;padding:2px 0;}}
+.gdoc{{outline:2px solid #bbbbbb;outline-offset:-2px;}}
+.gdoc .gd{{position:absolute;left:0;right:0;bottom:0;background:rgba(31,29,24,.78);color:#f2f2f2;font-size:9.5px;text-align:center;padding:2px 0;}}
 .players{{display:flex;gap:14px;flex-wrap:wrap;}}
 .player{{margin:0;width:240px;}}
 .poster{{position:relative;}}
 .poster img{{width:240px;height:150px;object-fit:cover;border-radius:8px;display:block;}}
 .poster .pv{{position:absolute;top:56px;left:104px;color:#fff;font-size:26px;text-shadow:0 0 8px #000;}}
-.poster .pnote{{position:absolute;left:0;right:0;bottom:0;background:rgba(31,29,24,.8);color:#efece3;font-size:10px;text-align:center;padding:3px 6px;border-radius:0 0 8px 8px;}}
+.poster .pnote{{position:absolute;left:0;right:0;bottom:0;background:rgba(31,29,24,.8);color:#f2f2f2;font-size:10px;text-align:center;padding:3px 6px;border-radius:0 0 8px 8px;}}
 figcaption b{{display:block;font-size:13.5px;margin-top:6px;}}
 figcaption span{{color:var(--mut);font-size:12px;}}
-.ask{{background:#f4f3ee;border-left:3px solid var(--blue);padding:12px 16px;font-size:13.5px;margin:12px 0;}}
+.ask{{background:#f7f7f7;border-left:3px solid var(--blue);padding:12px 16px;font-size:13.5px;margin:12px 0;}}
 .dl{{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:6px 10px 0 0;text-decoration:none;color:var(--ink);font-size:13.5px;background:#fff;}}
 footer{{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;color:var(--mut);font-size:12.5px;}}
 a{{color:var(--blue);}}
 </style></head><body>
 <div class="fiction"><b>FICTIONAL DEMONSTRATION.</b> Every name, party, vehicle, document, number, and image on this
-page is invented. This is a template exemplar from the <a style="color:#ffd34d" href="https://github.com/buildtherecord/lemon-case-file">lemon-case-file</a> method.</div>
+page is invented. This is a template exemplar from the <a style="color:#ffffff" href="https://github.com/buildtherecord/lemon-case-file">lemon-case-file</a> method.</div>
 <div class="wrap">
 <h1>The Meridian EV Case — Timeline &amp; Defect History</h1>
 <div class="sub">2024 Acme Meridian EV &middot; VIN ACME00DEMO000000 &middot; Repurchase review case #00-DEMO (fictional)</div>
@@ -251,8 +251,8 @@ driving (#048).</p>
 <tbody>{lrows}</tbody></table>
 
 <h2>Timeline</h2>
-<p class="sub" style="margin-top:-4px">Hover any mark; click for detail. Red bar: recall from federal filing to the work
-on this car (white tick: remedy became available). Grey: at the dealership. Blue: owner reports and dated captures.</p>
+<p class="sub" style="margin-top:-4px">Hover any mark; click for detail. Top bar: recall, from federal filing to the work on this car (white tick: the remedy
+became available). Middle: at the dealership. Bottom ticks: owner reports and dated captures.</p>
 <svg id="tlsvg" viewBox="0 0 1000 252" style="width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;">{''.join(S)}</svg>
 
 <h2>Exemplar recordings</h2>
