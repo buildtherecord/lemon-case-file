@@ -58,6 +58,12 @@ Recurrence after repair is the spine of a repurchase case. Make it impossible to
 
 ## 5. Their own records are evidence — request them
 
+(The general form of this — the counterparty-file principle — is: whoever is
+deciding against you holds records about your case; request them, organized
+around your timestamps, before you argue. Every sibling method has its
+instance: diagnostic logs here, the claim file in insurance, the public permit
+record in construction.)
+
 Manufacturers retain diagnostic session logs, fault memory, and telematics that
 outlive what the dealer clears at service. Request them in writing, organized by your
 timestamped incidents (full calendar day around each), plus complete logs from every

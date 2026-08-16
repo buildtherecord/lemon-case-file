@@ -9,10 +9,11 @@ contributions come from people who have actually run the method.
   fixed it, PR the fix with one sentence on what went wrong. Keep the discipline
   rules intact — PRs that soften the evidence rules (source-or-it-doesn't-enter,
   verbatim quotes, no padded counts) will be declined.
-- **Jurisdiction notes.** Short files under `jurisdictions/` (e.g. `us-ca.md`,
-  `us-il.md`, `de.md`): the statute name, the repurchase standard in one paragraph,
-  deadlines, the arbitration body, and any quirk of the mileage-offset formula.
-  Cite the statute; no legal advice, just signposts.
+- **Jurisdiction notes.** Files under `jurisdictions/` — the statute name, the
+  repurchase standard in one paragraph, deadline rules, the arbitration body, and
+  any quirk of the offset formula. Copy `jurisdictions/TEMPLATE.md`, cite primary
+  sources, and run `python3 tools/validate_jurisdictions.py` before the PR. No
+  legal advice, just signposts.
 - **Manufacturer notes.** What the diagnostic system is called (ODIS, Techstream,
   PIWIS, …), what records they retain, what worked in a request.
 - **Anonymized outcomes.** A short writeup of how the method held up — what the

@@ -43,3 +43,14 @@ The assistant builds; you rule. Decisions that stay yours: what gets omitted, wh
 goes online, wording of anything with your name on it, redaction scope, whether and
 when to send, and anything irreversible. A good assistant will queue these for you
 instead of guessing.
+
+## Jurisdiction files
+
+If `jurisdictions/` contains a file matching my jurisdiction or plan type, load
+it as a MAP of leads — statutes, bodies, thresholds — then re-verify every
+deadline, threshold, and notice rule against the primary source it cites before
+any of it appears in something I send or file. Repo entries are dated signposts,
+not current law; entries over 12 months old are historical hints. No deadline is
+ever taken from the repo. If no file exists for my jurisdiction, research the
+equivalents, and offer to draft a new jurisdictions file from what we verify —
+that contribution is the repo's whole point.
