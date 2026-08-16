@@ -1,0 +1,55 @@
+name: Legal review
+description: "You practice law and have ~30-60 min to review one file for accuracy in your jurisdiction. No git needed."
+title: "[Legal review] "
+labels: ["legal-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you — this is the highest-leverage hour this project can receive.
+        This does not create an attorney-client relationship, is not legal
+        advice to any specific person, and your review will never be presented
+        as an endorsement of any individual's claim. Everything here is public
+        under Apache-2.0.
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: State / jurisdiction you're reviewing for
+      placeholder: "e.g. Illinois"
+    validations:
+      required: true
+  - type: input
+    id: file
+    attributes:
+      label: Which file(s) did you review?
+      placeholder: "e.g. prompts/03-defect-timeline.md, jurisdictions/us-il.md"
+    validations:
+      required: true
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: What did you find?
+      multiple: true
+      options:
+        - A claim stated as fact that actually varies by state
+        - A deadline or statute cited without a primary-source citation
+        - A place the prompt should say "stop — get counsel now" and doesn't
+        - Something else worth a maintainer's attention
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: What should change, and why
+      placeholder: Be as specific as you can — quote the line if possible.
+    validations:
+      required: true
+  - type: checkboxes
+    id: liability
+    attributes:
+      label: Before you submit
+      options:
+        - label: I understand this review does not create an attorney-client relationship and is not legal advice to any specific person.
+          required: true
+        - label: I'm commenting on the general accuracy of public information, not any individual user's facts.
+          required: true

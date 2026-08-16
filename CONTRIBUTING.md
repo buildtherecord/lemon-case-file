@@ -33,13 +33,22 @@ contributions come from people who have actually run the method.
 
 ## If you practice law
 
-The highest-leverage hour anyone can give this repo is a practitioner's review:
-where could this method mislead a layperson in your jurisdiction? Which prompt
-should say "stop — get counsel now"? What belongs in your state's
-`jurisdictions/` signpost file? Open an issue or write to
-**mailbox@buildtherecord.org**. Contributions are public under Apache-2.0;
-nothing here creates an attorney-client relationship, and no contribution is
-presented as an endorsement of any individual claim.
+The highest-leverage hour anyone can give this repo is a practitioner's review.
+Open a new issue and pick the **Legal review** template — no git required,
+scoped to one file, ~30-60 min. It walks you through the same checklist as
+below and submits as a labeled issue a maintainer will act on. Or write to
+**mailbox@buildtherecord.org**.
+
+Review checklist (what the issue form asks):
+
+1. Any claim stated as fact that actually varies by state?
+2. Any deadline or statute cited without a primary-source citation?
+3. Any place a layperson should be told to stop and get counsel, that doesn't?
+4. Tone check: information, not advice?
+
+Contributions are public under Apache-2.0; nothing here creates an
+attorney-client relationship, and no contribution is presented as an
+endorsement of any individual claim.
 
 ## Mechanics
 
