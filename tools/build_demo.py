@@ -163,7 +163,7 @@ TTJS = "var TT=" + str(TT).replace("None", "null") + ";"
 
 HTML = f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Demo case file — fictional — lemon-case-file</title>
+<link rel="canonical" href="https://buildtherecord.org/lemon-case-file/">\n<title>Demo case file — fictional — lemon-case-file</title>
 <style>
 :root{{--ink:#111111;--mut:#555555;--line:#dcdcdc;--blue:#111111;--paper:#ffffff;}}
 body{{font:15px/1.6 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:var(--ink);margin:0;background:var(--paper);}}

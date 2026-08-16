@@ -9,7 +9,7 @@ It was developed during a real, self-represented lemon-law repurchase claim,
 working with an AI assistant (Claude) as the builder. Everything case-specific has
 been removed; what remains is the process that made the record persuasive.
 
-**See what you end up with:** the [demo case file](https://buildtherecord.github.io/lemon-case-file/)
+**See what you end up with:** the [demo case file](https://buildtherecord.org/lemon-case-file/)
 — a fully fictional exemplar (every name, document, and image invented; fact
 pattern modeled on published appellate opinions — see [`EXEMPLARS.md`](EXEMPLARS.md)).
 
