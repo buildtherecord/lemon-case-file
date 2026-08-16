@@ -31,8 +31,20 @@ contributions come from people who have actually run the method.
 - Anything that turns prompts into legal argument templates. The record states
   facts; the cover email names the standard once. That's the design.
 
+## If you practice law
+
+The highest-leverage hour anyone can give this repo is a practitioner's review:
+where could this method mislead a layperson in your jurisdiction? Which prompt
+should say "stop — get counsel now"? What belongs in your state's
+`jurisdictions/` signpost file? Open an issue or write to
+**mailbox@buildtherecord.org**. Contributions are public under Apache-2.0;
+nothing here creates an attorney-client relationship, and no contribution is
+presented as an endorsement of any individual claim.
+
 ## Mechanics
 
 Fork, branch, PR. Keep files in the existing voice: short, concrete, no hype.
 For demo-site changes, include a screenshot. By contributing you license your
 contribution under Apache-2.0.
+
+Questions and anonymized outcomes: **mailbox@buildtherecord.org**.

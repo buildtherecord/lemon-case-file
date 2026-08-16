@@ -61,8 +61,9 @@ pattern modeled on published appellate opinions — see [`EXEMPLARS.md`](EXEMPLA
 If you run the method — win, lose, or settle — the next owner benefits from what
 you learned. Prompt fixes from real use, jurisdiction notes, manufacturer
 diagnostic-system notes, and anonymized outcome writeups are all welcome; real
-case documents are not (this repo stays 100% synthetic). See
-[`CONTRIBUTING.md`](CONTRIBUTING.md).
+case documents are not (this repo stays 100% synthetic). See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+**Lawyers:** an hour of practitioner review is the most valuable contribution of
+all — see the note there, or write to **mailbox@buildtherecord.org**.
 
 ## What this is not
 
