@@ -1,5 +1,13 @@
 # lemon-case-file
 
+> **Volunteer project — no response guarantee.** Nobody is on duty here. Issues and
+> pull requests are read, but replies are not guaranteed and can take a long time.
+> The method works as-is without contacting anyone.
+>
+> **Not a coder? You do not need GitHub.** Each method has a plain-language,
+> step-by-step guide that works on a phone: **https://buildtherecord.org/start.html**
+
+
 **A method, a set of AI prompts, and a small amount of free infrastructure for a
 vehicle owner to build a professional-grade defect case file** — the kind of
 evidence presentation a manufacturer's repurchase reviewer, an arbitrator, or an
