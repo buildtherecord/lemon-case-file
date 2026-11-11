@@ -1,0 +1,365 @@
+{
+ "advice_wording.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "strong case",
+  "args": []
+ },
+ "banned_word_for_this_case.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "lists it as a word it never uses",
+  "args": []
+ },
+ "beat_title_types_dates.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "types dates",
+  "args": []
+ },
+ "cites_exhibit_with_range_that_misses.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "cites E2",
+  "args": []
+ },
+ "clipped_quote_with_strict.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "stop right before 'unless'",
+  "args": [
+   "--strict"
+  ]
+ },
+ "computed_deadline.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "never computes",
+  "args": []
+ },
+ "counsel_marker_in_summary_outward.json": {
+  "tools": [
+   "home"
+  ],
+  "contains": "meant for counsel",
+  "args": []
+ },
+ "date_in_summary_not_in_record.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "no fact, span, document or deadline",
+  "args": []
+ },
+ "date_not_real.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not a real date",
+  "args": []
+ },
+ "deadline_asserted.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "asserts a deadline",
+  "args": []
+ },
+ "deadline_without_date_or_words.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "document's own words",
+  "args": []
+ },
+ "documented_fact_not_shown_by_document.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "does not appear to show it",
+  "args": []
+ },
+ "documented_no_source.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "names no document",
+  "args": []
+ },
+ "dollar_figure_far_from_cited_exhibit.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "the figure $480,000",
+  "args": []
+ },
+ "dollar_figure_in_summary_not_in_any_exhibit.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "any document in the record",
+  "args": []
+ },
+ "dollar_figure_not_in_cited_exhibit.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "the figure $48.00",
+  "args": []
+ },
+ "featured_still_unconfirmed_grade_with_strict.json": {
+  "tools": [
+   "home"
+  ],
+  "contains": "has not confirmed that grade",
+  "args": [
+   "--strict"
+  ]
+ },
+ "future_tense_about_a_past_date_with_strict.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "a date before the record",
+  "args": [
+   "--strict"
+  ]
+ },
+ "held_phrase_on_page_outward.json": {
+  "tools": [
+   "home"
+  ],
+  "contains": "holds back",
+  "args": []
+ },
+ "ids_differ_by_capitals.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "differ only by capitals",
+  "args": []
+ },
+ "interval_on_month_only_fact.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "cannot be computed",
+  "args": []
+ },
+ "liability_asserted.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "applies law to the facts",
+  "args": []
+ },
+ "miles_reading_not_in_exhibit.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "the reading 48,210 is not in exhibit E1",
+  "args": []
+ },
+ "needs_clearance_but_shared.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "needing clearance",
+  "args": []
+ },
+ "nothing_released_outward.json": {
+  "tools": [
+   "home"
+  ],
+  "contains": "would be empty",
+  "args": []
+ },
+ "path_id.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not a safe id",
+  "args": []
+ },
+ "placeholder_unknown_fact.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not a fact",
+  "args": []
+ },
+ "precision_finer_than_date.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "only known to the month",
+  "args": []
+ },
+ "private_host_link_outward.json": {
+  "tools": [
+   "home"
+  ],
+  "contains": "a private site",
+  "args": []
+ },
+ "prognosis_good_chance.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "predicts the outcome",
+  "args": []
+ },
+ "prognosis_will_likely_win.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "predicts the outcome",
+  "args": []
+ },
+ "prose_quote_not_in_source.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "are not in",
+  "args": []
+ },
+ "quote_changes_dollars.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not in E1 word for word",
+  "args": []
+ },
+ "quote_drops_not.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "cuts off a 'not'",
+  "args": []
+ },
+ "quote_drops_un.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not in E1 word for word",
+  "args": []
+ },
+ "quote_fragment_of_word.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not in E1 word for word",
+  "args": []
+ },
+ "script_in_title.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "page code",
+  "args": []
+ },
+ "should_hire_a_lawyer.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "tells the reader to get legal help",
+  "args": []
+ },
+ "status_not_in_vocabulary.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "must be one of",
+  "args": []
+ },
+ "typed_count.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "typed into the text",
+  "args": []
+ },
+ "typed_count_repair_orders.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "'nine repair orders' is a number typed",
+  "args": []
+ },
+ "typed_count_stored_faults.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "'nineteen stored faults'",
+  "args": []
+ },
+ "unknown_placeholder.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not a count this tool knows",
+  "args": []
+ },
+ "unsafe_id.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "not a safe id",
+  "args": []
+ },
+ "unverified_quote_with_strict.json": {
+  "tools": [
+   "views",
+   "home"
+  ],
+  "contains": "cannot be checked",
+  "args": [
+   "--strict"
+  ]
+ }
+}

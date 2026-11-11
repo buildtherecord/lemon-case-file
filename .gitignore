@@ -2,3 +2,10 @@ wrangler.toml
 worker.sealed.js
 .wrangler/
 node_modules/
+
+# generated or private
+tools/views/private-hosts.txt
+tools/views/--help/
+tools/views/examples/
+__pycache__/
+*.pyc

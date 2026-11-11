@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Build the Record: the record (one file, published two ways)",
+  "description": "The contract for the record that tools/views reads. One record produces the inward pages (build_views.py: the full linked record) and the outward page (build_home.py: only what was released). This is a second contract beside bundle.schema.json, which describes the vehicle media bundle. Both builders validate against this file before they write anything. A field not listed here is reported and ignored (an error with --strict).",
+  "type": "object",
+  "required": ["meta", "facts"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": { "$ref": "#/$defs/meta" },
+    "people": { "type": "array", "items": { "$ref": "#/$defs/person" } },
+    "issues": { "type": "array", "items": { "$ref": "#/$defs/labelled" } },
+    "exhibits": { "type": "array", "items": { "$ref": "#/$defs/exhibit" } },
+    "facts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/fact" } },
+    "lanes": { "type": "array", "items": { "$ref": "#/$defs/labelled" } },
+    "spans": { "type": "array", "items": { "$ref": "#/$defs/span" } },
+    "beats": { "type": "array", "items": { "$ref": "#/$defs/beat" } },
+    "intervals": { "type": "array", "items": { "$ref": "#/$defs/interval" } },
+    "deadlines": { "type": "array", "items": { "$ref": "#/$defs/deadline" } },
+    "authorities": { "description": "Who was allowed to act for whom, by what document, and between which two facts. The tool records the dates; whether an authority was valid, or when it legally ended, is a question for a lawyer.", "type": "array", "items": { "$ref": "#/$defs/authority" } },
+    "ledger": { "description": "Money that moved, one row per transaction, each from a document. Totals are computed from these rows ({sum:...}); never type a total.", "type": "array", "items": { "$ref": "#/$defs/entry" } },
+    "held_back": {
+      "description": "Items kept in the record file that neither builder renders. A string, or an object with a phrase, is also treated as a held-back phrase: the outward build fails if it appears anywhere on the page or in an outgoing file.",
+      "type": "array",
+      "items": { "type": ["string", "object"] }
+    }
+  },
+  "$defs": {
+    "id": {
+      "description": "Letters, digits, underscore and hyphen only. Ids become file names and page addresses. Two ids that differ only by capitals count as the same id.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,40}$"
+    },
+    "date": {
+      "description": "A day (2026-10-04), a month (2026-10) or a year (2026). A month or year is shown as 'October 2026' or '2026' and is never padded to the 1st in the output.",
+      "type": "string",
+      "pattern": "^\\d{4}(-\\d{2}(-\\d{2})?)?$"
+    },
+    "day": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "optionalDate": { "type": "string", "pattern": "^(\\d{4}(-\\d{2}(-\\d{2})?)?)?$" },
+    "precision": { "enum": ["day", "month", "year"] },
+    "status": {
+      "description": "The one status vocabulary. documented: at least one cited document shows it. account: the claimant's own account, no document yet. disputed: the parties say different things. open: a question, never stated as fact; an open item always carries the label 'Open question' wherever it appears and is counted apart from the facts.",
+      "enum": ["documented", "account", "disputed", "open"]
+    },
+    "labelled": {
+      "type": "object",
+      "required": ["id", "label"],
+      "additionalProperties": false,
+      "properties": { "id": { "$ref": "#/$defs/id" }, "label": { "type": "string", "minLength": 1 } }
+    },
+    "person": {
+      "type": "object",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": ["string", "null"] }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["title", "summary", "updated"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "product": { "type": "string" },
+        "subtitle": { "type": ["string", "null"] },
+        "summary": { "description": "May hold placeholders such as {days:F1:F2}, {count:facts}, {count:documents}, {count:recordings}, {interval:ID}, {miles:EXHIBIT:A:B}. The builder fills them in from the record. {miles:E12:48,210:48,222} is the difference of two odometer readings that are both in the text of exhibit E12. A dollar figure written here must be in a document in the record; dates written here (March 12, 2025) must be the date of a fact, span, document or deadline.", "type": "string", "minLength": 1 },
+        "ask": { "type": ["string", "null"] },
+        "amount": { "type": ["string", "null"] },
+        "jurisdiction": { "type": ["string", "null"] },
+        "lawyer": { "type": ["string", "null"] },
+        "sent_to_other_side": { "type": ["string", "null"] },
+        "offers": { "type": ["string", "null"] },
+        "absences": { "description": "What was looked for and not found in any document.", "type": ["string", "array", "null"], "items": { "type": "string" } },
+        "contact_note": { "type": ["string", "null"] },
+        "footer": { "type": ["string", "null"] },
+        "claimant_label": { "description": "How the page names the claimant's side in 'Per the owners' letter of ...'. Default: the claimant's.", "type": ["string", "null"] },
+        "updated": { "description": "The 'Last updated' stamp shown at the top of every page.", "type": "string", "minLength": 1 },
+        "asof": { "description": "The date the page was written, used for 'Day N of the review'.", "$ref": "#/$defs/day" },
+        "review_opened": { "$ref": "#/$defs/day" },
+        "share_gate": { "$ref": "#/$defs/share_gate" },
+        "banned": { "description": "Extra words or phrases this case never uses in anything the claimant or assistant wrote.", "type": "array", "items": { "type": "string" } },
+        "held_phrases": { "description": "Phrases held back from the outward page. The outward build fails if one appears anywhere.", "type": "array", "items": { "type": "string" } },
+        "standing": { "$ref": "#/$defs/standing" },
+        "outward": { "description": "False keeps this record off the outward page entirely: build_home.py refuses to build it. Set it for a record that accuses a named person, until a lawyer has read it.", "type": "boolean" }
+      }
+    },
+    "share_gate": {
+      "description": "Answered before an outward page is sent. Until all five are set, the outward page is stamped DRAFT and carries no snapshot id.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recipient": { "description": "Who will receive this copy.", "type": "string" },
+        "confidentiality_checked": { "description": "Settlement or confidentiality terms were checked.", "type": "boolean" },
+        "names_checked": { "description": "People and businesses named beyond what the documents say were checked.", "type": "boolean" },
+        "defamation_reminder_ack": { "description": "The defamation-risk reminder was read.", "type": "boolean" },
+        "attorney_read": { "description": "An attorney has read this copy.", "type": "boolean" }
+      }
+    },
+    "exhibit": {
+      "type": "object",
+      "required": ["id", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "author": { "description": "Who wrote or made the document. Facts supported only by the claimant's own documents are shown as 'Per the claimant's <kind> of <date>', not as documented.", "enum": ["claimant", "other_side", "third_party"] },
+        "date": { "$ref": "#/$defs/optionalDate" },
+        "end": { "description": "Last day, for a document that covers a range (a message export).", "$ref": "#/$defs/optionalDate" },
+        "date_precision": { "$ref": "#/$defs/precision" },
+        "kind": { "type": ["string", "null"] },
+        "file": { "description": "A path inside the files folder, or an http(s) address. Outward builds copy the file only when share is true, with its metadata removed.", "type": ["string", "null"] },
+        "text": { "description": "The words visible in the document. Quotes in the record are checked against this, on whole words.", "type": ["string", "null"] },
+        "share": { "description": "Must be true for the document to go on the outward page. No value means not shared.", "type": "boolean" },
+        "feature": { "type": "boolean" },
+        "thumb": { "type": ["string", "null"] },
+        "link": { "type": ["string", "null"] },
+        "caption": { "type": ["string", "null"] },
+        "excerpt_of": { "description": "Id of the parent exhibit. An excerpt is shown under its parent and never counted.", "$ref": "#/$defs/id" },
+        "fold_into": { "description": "Id of the exhibit kept when this one is the same item. Hidden and not counted, never deleted.", "$ref": "#/$defs/id" },
+        "needs_clearance": { "description": "Who must clear this document before it can go outward. While this is set, share must not be true.", "type": ["string", "null"] },
+        "allow_markers": { "description": "Words such as 'privileged' that the other side's own boilerplate puts in this document. Listed in the private report, never silent.", "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["ex"],
+      "additionalProperties": false,
+      "properties": {
+        "ex": { "$ref": "#/$defs/id" },
+        "loc": { "description": "Where in the document (a page, a line, a time). With a quote that is in the document, it also settles the check that a documented fact shares words with its document.", "type": ["string", "null"] },
+        "quote": { "description": "Words from the document, checked against its text. A quote that stops right before if, or, unless, until, but, except or provided is noted (an error with --strict).", "type": ["string", "null"] },
+        "later_document": { "description": "True after checking that this document is dated on a different day than the fact.", "type": "boolean" }
+      }
+    },
+    "fact": {
+      "type": "object",
+      "required": ["id", "date", "text", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "date": { "$ref": "#/$defs/date" },
+        "date_precision": { "$ref": "#/$defs/precision" },
+        "time": { "type": ["string", "null"] },
+        "end": { "$ref": "#/$defs/date" },
+        "text": { "type": "string", "minLength": 1 },
+        "status": { "$ref": "#/$defs/status" },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+        "people": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "issues": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "lane": { "type": ["string", "null"] },
+        "outward": { "description": "Must be true for the entry to go on the outward page. No value means not released.", "type": "boolean" },
+        "excerpt_of": { "description": "Id of the parent entry. Shown under its parent, never counted.", "$ref": "#/$defs/id" },
+        "fold_into": { "description": "Id of the entry kept when this one is the same item. Hidden and not counted, never deleted.", "$ref": "#/$defs/id" },
+        "grade": { "enum": ["A", "B", "C"] },
+        "tier": { "enum": ["B1", "B2"] },
+        "reviewed_by": { "description": "Who set the grade. A grade is a proposal until the owner has watched.", "enum": ["assistant", "owner"] }
+      }
+    },
+    "span": {
+      "type": "object",
+      "required": ["label", "start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "start": { "$ref": "#/$defs/day" },
+        "end": { "$ref": "#/$defs/day" },
+        "note": { "type": ["string", "null"] },
+        "lanes": { "oneOf": [ { "const": "all" }, { "type": "array", "items": { "$ref": "#/$defs/id" } } ] }
+      }
+    },
+    "beat": {
+      "description": "A section of the story: a date range of entries plus optional prose. The page prints the date label from from and to; do not type dates in the title.",
+      "type": "object",
+      "required": ["title", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "line": { "type": ["string", "null"] },
+        "from": { "$ref": "#/$defs/date" },
+        "to": { "$ref": "#/$defs/date" },
+        "prose": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "interval": {
+      "description": "Days between two entries, computed from their dates.",
+      "type": "object",
+      "required": ["label", "a", "b"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "label": { "type": "string", "minLength": 1 },
+        "a": { "$ref": "#/$defs/id" },
+        "b": { "$ref": "#/$defs/id" }
+      }
+    },
+    "deadline": {
+      "description": "A deadline the claimant reports, with where it is written. Entered by the claimant, never computed by the tool, and never confirmed by it. Give the date the document states, or the document's own words.",
+      "type": "object",
+      "required": ["label", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "source": { "description": "Where it is written, or who said it.", "type": "string", "minLength": 1 },
+        "date": { "$ref": "#/$defs/day" },
+        "wording": { "description": "The document's own words about the deadline, quoted exactly.", "type": ["string", "null"] },
+        "ex": { "description": "The exhibit where the wording is written; the wording is checked against its text.", "$ref": "#/$defs/id" },
+        "confirmed_by": { "description": "Who confirmed it (a plan, an agency, an attorney). Never the tool.", "type": ["string", "null"] }
+      }
+    },
+    "standing": {
+      "description": "Whose claim this is. The person building the record is often not the person who can bring the claim (an heir, an executor, a policyholder, a homeowner). Who that is, is for a lawyer to confirm.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rights_holder": { "description": "The person who may be able to bring the claim (a person id), as the claimant understands it.", "$ref": "#/$defs/id" },
+        "builder_role": { "description": "How the person building the record relates to it, in plain words (for example: partner of an heir, helping).", "type": ["string", "null"] },
+        "permission": { "description": "How the rights holder agreed to this record being built: an exhibit id, or a short note of when and how.", "type": ["string", "null"] },
+        "confirmed_by": { "description": "Who confirmed who the rights holder is. Never the tool.", "type": ["string", "null"] }
+      }
+    },
+    "authority": {
+      "description": "A document under which one person could act for another, and the two facts that bound it in the record.",
+      "type": "object",
+      "required": ["id", "holder", "kind", "from"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "holder": { "description": "Who could act (a person id).", "$ref": "#/$defs/id" },
+        "for": { "description": "On whose behalf (a person id).", "$ref": "#/$defs/id" },
+        "kind": { "description": "What the document is, in its own words (a title on the document, an account role on a statement).", "type": "string", "minLength": 1 },
+        "from": { "description": "The fact that starts it (for example, the day the document was signed).", "$ref": "#/$defs/id" },
+        "to": { "description": "The fact that the claimant records as its end (a revocation, a death, a court order). The tool does not decide that it ended.", "$ref": "#/$defs/id" },
+        "ex": { "description": "The exhibit that is the document itself.", "$ref": "#/$defs/id" },
+        "note": { "type": ["string", "null"] }
+      }
+    },
+    "entry": {
+      "description": "One transaction. The amount must be written in a document the row cites.",
+      "type": "object",
+      "required": ["id", "date", "amount", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "date": { "$ref": "#/$defs/day" },
+        "amount": { "description": "As the document writes it, without the currency sign, like 12,500.00.", "type": "string", "pattern": "^[0-9]{1,3}(,[0-9]{3})*(\\.[0-9]{2})?$|^[0-9]+(\\.[0-9]{2})?$" },
+        "from": { "description": "Where the money came from: an account label or a person id.", "type": ["string", "null"] },
+        "to": { "description": "Where it went: an account label or a person id.", "type": ["string", "null"] },
+        "by": { "description": "Who made the transaction (a person id), if a document shows it.", "$ref": "#/$defs/id" },
+        "method": { "description": "Check, transfer, withdrawal, card, as the document says.", "type": ["string", "null"] },
+        "under": { "description": "The authority the transaction was made under, if a document shows it (an authority id).", "$ref": "#/$defs/id" },
+        "status": { "$ref": "#/$defs/status" },
+        "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/source" } },
+        "note": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

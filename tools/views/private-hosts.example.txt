@@ -1,0 +1,5 @@
+# Sites your shared page may never link to, load a thumbnail from or copy a file from: sites that need a login, or that name you.
+# One host name per line. A host also covers every site under it (records.example.net covers a.records.example.net).
+# Copy this file to private-hosts.txt (kept out of git) and replace the examples. private.example.com is always blocked.
+records.example.net
+portal.example.org

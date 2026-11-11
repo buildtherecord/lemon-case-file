@@ -1,0 +1,87 @@
+{
+ "meta": {
+  "title": "Fixture record",
+  "product": "vehicle",
+  "summary": "A technician wrote on a repair order. The owner wrote a letter.",
+  "ask": "A review",
+  "updated": "Oct 3, 2026, 9:00 AM CDT",
+  "asof": "2026-10-03"
+ },
+ "people": [
+  {
+   "id": "p1",
+   "name": "Owner",
+   "role": "Claimant"
+  },
+  {
+   "id": "p2",
+   "name": "Dealer",
+   "role": "Service department"
+  }
+ ],
+ "issues": [
+  {
+   "id": "noise",
+   "label": "Noise"
+  }
+ ],
+ "exhibits": [
+  {
+   "id": "E1",
+   "title": "Repair order",
+   "date": "2026-02-10",
+   "kind": "Repair order",
+   "author": "other_side",
+   "share": true,
+   "text": "Technician was unable to verify the concern. Vehicle not operating normally. Estimate to rebuild: $4,800. The balance remains unpaid in full."
+  },
+  {
+   "id": "E2",
+   "title": "Letter from the owner",
+   "date": "2026-03-01",
+   "kind": "Letter",
+   "author": "claimant",
+   "share": true,
+   "text": "We ask for a review."
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "date": "2026-02-10",
+   "text": "The technician wrote that the vehicle was “not operating normally.”",
+   "status": "verified",
+   "sources": [
+    {
+     "ex": "E1"
+    }
+   ],
+   "people": [
+    "p2"
+   ],
+   "issues": [
+    "noise"
+   ],
+   "outward": true
+  },
+  {
+   "id": "F2",
+   "date": "2026-03-01",
+   "text": "The owner wrote a letter asking for a review.",
+   "status": "documented",
+   "sources": [
+    {
+     "ex": "E2"
+    }
+   ],
+   "people": [
+    "p1"
+   ],
+   "issues": [
+    "noise"
+   ],
+   "outward": true
+  }
+ ],
+ "deadlines": []
+}

@@ -84,10 +84,17 @@
           "subsystem": { "type": "string", "description": "One of categories[]" },
           "description": { "type": "string", "description": "Only what is visible/audible in the capture" },
           "fileId": { "type": "string" },
-          "dupOf": { "type": ["string", "null"] },
-          "isDocScan": { "type": "boolean", "description": "True for captures of paperwork/apps — excluded from incident counts" },
+          "dupOf": { "type": ["string", "null"], "description": "Id of the item this is the same footage as. Folded: hidden and not counted, never deleted (fold_into in tools/triage)" },
+          "excerptOf": { "type": ["string", "null"], "description": "Id of the parent recording. An excerpt is shown, labelled with its parent, and never counted as separate evidence" },
+          "grade": { "enum": ["A", "B", "C"], "description": "A shown on camera; B supporting; C weaker. See METHOD.md 2a. A proposal until reviewedBy is owner" },
+          "tier": { "enum": ["B1", "B2"], "description": "Required when grade is B. B1 the owner describes the fault; B2 context, comparison, retake or timestamp to check" },
+          "reviewedBy": { "enum": ["assistant", "owner"], "description": "Who set the grade. Motion and sound need the owner" },
+          "ownerNote": { "type": "string", "description": "The owner's own words about what the item shows" },
           "sourceNote": { "type": "string", "description": "Where the date/time came from (metadata, filename, document)" }
-        }
+        },
+        "allOf": [
+          { "if": { "required": ["grade"], "properties": { "grade": { "const": "B" } } }, "then": { "required": ["tier"] } }
+        ]
       }
     }
   }

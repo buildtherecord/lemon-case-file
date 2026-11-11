@@ -35,6 +35,12 @@ pattern modeled on published appellate opinions — see [`EXEMPLARS.md`](EXEMPLA
 - **A diagnostic-records request** organized per demonstrated problem, so the
   manufacturer's own telemetry has to answer your timestamps.
 - **A short cover email** that states what you are asking for in the first sentence.
+- **Two pages from one record** (early, in [`tools/views/`](tools/views/)): an **outward**
+  page that anyone you send it to may read (public, light, phone-first, argues nothing,
+  only what you released, stamped with "Last updated" and a snapshot id), and an **inward**
+  record for you and your attorney (the full linked record). There is no page in between:
+  anything family should see goes on the outward page. See
+  [`docs/claimant-journeys/two-layer-model.md`](docs/claimant-journeys/two-layer-model.md).
 
 ## How to use it
 
@@ -57,11 +63,13 @@ pattern modeled on published appellate opinions — see [`EXEMPLARS.md`](EXEMPLA
 | Path | What it is |
 |------|-----------|
 | `METHOD.md` | The doctrine — evidence discipline, "the record argues by existing" |
-| `prompts/00–10` | Working-order prompts: inventory → bundle → ledger → phone log → records request → site → PDF → adversarial review → redaction → cover email |
+| `prompts/00–10` | Working-order prompts: inventory → triage (01b) → bundle → ledger → phone log → records request → site → PDF → adversarial review → redaction → cover email |
+| `tools/triage/` | Offline triage tools: review copies, frame sheets, duplicate finder, the owner's watch list, answer applier, quote check |
 | `site/` | Cloudflare Worker evidence viewer + deploy runbook (free tier) |
+| `tools/views/` | Builds the two pages from one record: the outward page (`build_home.py`) and the linked inward record (`build_views.py`). Early; what each checks is listed at the end of `METHOD.md` |
 | `schema/` | The bundle (source-of-truth JSON) schema + fictional example |
 | `templates/` | Exhibit numbering scheme, repurchase finance worksheet |
-| `docs/` | The fictional demo case file (GitHub Pages) |
+| `docs/` | The fictional demo case file (GitHub Pages) and, in `docs/claimant-journeys/`, design notes: personas, scenarios, safety gates, the two-layer model |
 | `EXEMPLARS.md` | Real published opinions worth reading, and why the demo is fictional |
 
 ## Contributing back
@@ -81,13 +89,20 @@ are real; some situations (crashes, injuries, fraud) need counsel immediately.
 What this repo automates is the part lawyers and manufacturers both respect
 regardless of venue: a complete, honest, verifiable record.
 
+A record you build before you hire a lawyer is generally not privileged, and keeping
+something off the outward page ("held back") is not the same as privilege. Assume anything
+you write or record may be demanded in a lawsuit, and never delete anything. A
+counsel-only space exists only once an attorney is involved and directs the work.
+
 ## Principles (the short version)
 
 The record argues by existing. State facts; never argue law in the record itself.
-Every number is verified against a source at build time. A screenshot proves only
-what is visible in it. Quote documents verbatim. Leave out weak evidence — and
-never omit something whose absence would make you look dishonest. The full
-doctrine is in [`METHOD.md`](METHOD.md).
+Every number is computed from the record, never typed from memory. A screenshot
+proves only what is visible in it. Quote documents verbatim. Release only what you
+have checked, keep everything else in the inward record, delete nothing, and never
+omit something whose absence would make you look dishonest. The full doctrine is in
+[`METHOD.md`](METHOD.md); its last section says which of these the tools check today
+and which are still planned.
 
 ## License
 
