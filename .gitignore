@@ -9,3 +9,4 @@ tools/views/--help/
 tools/views/examples/
 __pycache__/
 *.pyc
+build-the-record-*.zip

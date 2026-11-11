@@ -1,0 +1,31 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "author": {
+    "name": "Build the Record",
+    "url": "https://buildtherecord.org"
+  },
+  "description": "Organize your own case documents into one checked record: every document, a dated timeline, money that moved, and what is missing. Not legal advice.",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "capabilities": [
+          "Interactive"
+        ],
+        "category": "Productivity",
+        "defaultPrompt": "Hello. Help me organize my papers.",
+        "developerName": "Build the Record",
+        "displayName": "Build the Record",
+        "longDescription": "Organize your own case documents into one checked record: every document, a dated timeline, money that moved, and what is missing. Not legal advice.",
+        "shortDescription": "Organize your case papers"
+      }
+    }
+  },
+  "keywords": [
+    "records",
+    "documents",
+    "timeline"
+  ],
+  "name": "build-the-record",
+  "skills": "./skills",
+  "version": "0.2.0"
+}
